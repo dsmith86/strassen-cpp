@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CEFDE39F19D1F00600F22A4B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE39E19D1F00600F22A4B /* main.cpp */; };
 		CEFDE3A119D1F00600F22A4B /* Proc.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEFDE3A019D1F00600F22A4B /* Proc.1 */; };
+		CEFDE3AA19D1F03B00F22A4B /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE3A719D1F03B00F22A4B /* matrix.cpp */; };
+		CEFDE3AB19D1F03B00F22A4B /* proc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE3A919D1F03B00F22A4B /* proc.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +27,10 @@
 
 /* Begin PBXFileReference section */
 		CEFDE39B19D1F00600F22A4B /* Proc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Proc; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEFDE39E19D1F00600F22A4B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CEFDE3A019D1F00600F22A4B /* Proc.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Proc.1; sourceTree = "<group>"; };
+		CEFDE3A719D1F03B00F22A4B /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix.cpp; sourceTree = "<group>"; };
+		CEFDE3A819D1F03B00F22A4B /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		CEFDE3A919D1F03B00F22A4B /* proc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = proc.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +63,9 @@
 		CEFDE39D19D1F00600F22A4B /* Proc */ = {
 			isa = PBXGroup;
 			children = (
-				CEFDE39E19D1F00600F22A4B /* main.cpp */,
+				CEFDE3A719D1F03B00F22A4B /* matrix.cpp */,
+				CEFDE3A819D1F03B00F22A4B /* matrix.h */,
+				CEFDE3A919D1F03B00F22A4B /* proc.cpp */,
 				CEFDE3A019D1F00600F22A4B /* Proc.1 */,
 			);
 			path = Proc;
@@ -117,7 +122,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEFDE39F19D1F00600F22A4B /* main.cpp in Sources */,
+				CEFDE3AA19D1F03B00F22A4B /* matrix.cpp in Sources */,
+				CEFDE3AB19D1F03B00F22A4B /* proc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
