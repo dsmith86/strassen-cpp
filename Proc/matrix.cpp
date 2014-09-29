@@ -22,7 +22,7 @@ Matrix::Matrix (short n)
 
 Matrix::~Matrix()
 {
-    delete * data;
+    //delete * data;
 }
 
 Matrix::Matrix (const Matrix& source)
@@ -32,6 +32,7 @@ Matrix::Matrix (const Matrix& source)
     
     for (int i = 0; i < length(); i++)
     {
+        data[i] = new short [source.length()];
         for (int j = 0; j < length(); j++)
         {
             data[i][j] = source.getElement(i, j);
@@ -52,6 +53,14 @@ void Matrix::operator= (const Matrix& source)
         dimensions = source.length();
         
         data = new short * [source.length()];
+        
+        for (int i = 0; i < length(); i++)
+        {
+            for (int j = 0; j < length(); j++)
+            {
+                data[i] = new short [source.length()];
+            }
+        }
     }
     
     for (int i = 0; i < length(); i++)
@@ -79,6 +88,22 @@ Matrix operator+ (const Matrix a, const Matrix b)
     return c;
 }
 
+Matrix operator- (const Matrix a, const Matrix b)
+{
+    short length = a.length();
+    Matrix c = Matrix(length);
+    
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            c.setElement(i, j, a.getElement(i, j) + b.getElement(i, j));
+        }
+    }
+    
+    return c;
+}
+
 Matrix operator* (const Matrix a, const Matrix b)
 {
     short length = a.length();
@@ -88,7 +113,7 @@ Matrix operator* (const Matrix a, const Matrix b)
     {
         for (int j = 0; j < length; j++)
         {
-            c.setElement(i, j, a.getElement(i, j) * b.getElement(i, j));
+            c.setElement(i, j, a.getElement(i, j) - b.getElement(i, j));
         }
     }
     
@@ -122,15 +147,28 @@ Matrix Matrix::subset(short p, short q, short r, short s) const
     
     Matrix m = Matrix(q - p);
     
-    for (int i = p; i < q; i++)
+    for (int i = p - 1; i < q - 1; i++)
     {
-        for (int j = r; j < q; j++)
+        for (int j = r - 1; j < s - 1; j++)
         {
             m.setElement(i, j, data[i][j]);
         }
     }
     
     return m;
+}
+
+void Matrix::setSubset(short p, short q, short r, short s, const Matrix& source)
+{
+    short n = source.length();
+    
+    for (int i = p - 1; i < q - 1; i++)
+    {
+        for (int j = r - 1; j < s - 1; j++)
+        {
+            data[i][j] = source.getElement(i % n, j % n);
+        }
+    }
 }
 
 void Matrix::setElement(short i, short j, short newVal)

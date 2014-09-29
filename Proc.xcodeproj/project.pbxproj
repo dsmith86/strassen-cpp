@@ -63,9 +63,9 @@
 		CEFDE39D19D1F00600F22A4B /* Proc */ = {
 			isa = PBXGroup;
 			children = (
-				CEFDE3A719D1F03B00F22A4B /* matrix.cpp */,
-				CEFDE3A819D1F03B00F22A4B /* matrix.h */,
 				CEFDE3A919D1F03B00F22A4B /* proc.cpp */,
+				CEFDE3A819D1F03B00F22A4B /* matrix.h */,
+				CEFDE3A719D1F03B00F22A4B /* matrix.cpp */,
 				CEFDE3A019D1F00600F22A4B /* Proc.1 */,
 			);
 			path = Proc;
@@ -233,6 +233,7 @@
 				CEFDE3A619D1F00600F22A4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
