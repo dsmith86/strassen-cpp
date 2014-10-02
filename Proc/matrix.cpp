@@ -1,7 +1,7 @@
 #include "matrix.h"
 #include <cassert>
 #include <cstdlib>
-#include <time.h>
+#include <sys/timeb.h>
 #include <iostream>
 
 Matrix::Matrix (short n)
@@ -97,7 +97,7 @@ Matrix operator- (const Matrix a, const Matrix b)
     {
         for (int j = 0; j < length; j++)
         {
-            c.setElement(i, j, a.getElement(i, j) + b.getElement(i, j));
+            c.setElement(i, j, a.getElement(i, j) - b.getElement(i, j));
         }
     }
     
@@ -113,7 +113,7 @@ Matrix operator* (const Matrix a, const Matrix b)
     {
         for (int j = 0; j < length; j++)
         {
-            c.setElement(i, j, a.getElement(i, j) - b.getElement(i, j));
+            c.setElement(i, j, a.getElement(i, j) * b.getElement(i, j));
         }
     }
     
@@ -127,7 +127,10 @@ short Matrix::length () const
 
 void Matrix::fillRandom ()
 {
-	srand(time_t(NULL));
+    struct timeb time;
+    ftime(&time);
+    
+    srand(time.millitm);
 
 	assert(data);
 	for (int i = 0; i < dimensions; i++)
@@ -136,37 +139,63 @@ void Matrix::fillRandom ()
 
 		for (int j = 0; j < dimensions; j++)
 		{
-			data[i][j] = rand() % 10 + 1;
+            int r = rand() % 10 + 1;
+			data[i][j] = r;
 		}
 	}
 }
 
 Matrix Matrix::subset(short p, short q, short r, short s) const
 {
+    int t, u;
+    
     assert (q - p == s - r);
     
-    Matrix m = Matrix(q - p);
+    Matrix m = Matrix(q - p + 1);
+    short n = m.length();
     
-    for (int i = p - 1; i < q - 1; i++)
+    t %= n;
+    u %= n;
+    
+    for (int i = p; i <= q; i++)
     {
-        for (int j = r - 1; j < s - 1; j++)
+        for (int j = r; j <= s; j++)
         {
-            m.setElement(i, j, data[i][j]);
+            m.setElement(u, t, data[i-1][j-1]);
         }
     }
     
+    m.printMatrix();
+    
     return m;
+}
+
+void Matrix::printMatrix()
+{
+    std::cout << "Matrix dimensions: " << dimensions << " by " << dimensions << std::endl;
+    std::cout << "Matrix:" << std::endl;
+    
+    for (int i = 0; i < dimensions; i++)
+    {
+        for (int j = 0; j < dimensions; j++)
+        {
+            std::cout << data[i][j] << "    ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
 }
 
 void Matrix::setSubset(short p, short q, short r, short s, const Matrix& source)
 {
     short n = source.length();
-    
-    for (int i = p - 1; i < q - 1; i++)
+
+    for (int i = p; i <= q; i++)
     {
-        for (int j = r - 1; j < s - 1; j++)
+        for (int j = r; j <= s; j++)
         {
-            data[i][j] = source.getElement(i % n, j % n);
+            data[i-1][j-1] = source.getElement((i - 1) % n, (j - 1) % n);
         }
     }
 }

@@ -15,6 +15,8 @@ public:
 	void fillRandom ();
     Matrix subset(short p, short q, short r, short s) const;
     void setSubset(short p, short q, short r, short s, const Matrix& source);
+    
+    void printMatrix ();
 private:
     void setElement(short i, short j, short newVal);
     short getElement(short i, short j) const;

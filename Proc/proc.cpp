@@ -27,16 +27,23 @@ long long timer (short n)
 	assert(n >= 1);
 
 	Matrix a = Matrix(n);
-	a.fillRandom();
+    a.fillRandom();
+    std::cout << "matrix a" << std::endl;
+    a.printMatrix();
 
 	Matrix b = Matrix(n);
-	b.fillRandom();
+    b.fillRandom();
+    std::cout << "matrix b" << std::endl;
+    b.printMatrix();
 
 	Matrix c = Matrix(n);
 
 	auto start = std::chrono::high_resolution_clock::now();
 
 	proc (a, b, c);
+    
+    std::cout << "matrix c" << std::endl;
+    c.printMatrix();
 
 	auto elapsed = std::chrono::high_resolution_clock::now() - start;
 
@@ -51,6 +58,7 @@ void proc (
 	Matrix& c)
 {
     short n = a.length();
+    std::cout << "n: " << n << std::endl;
     short mid = n/2;
     
     std::vector<Matrix> p;
