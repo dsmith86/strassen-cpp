@@ -58,7 +58,6 @@ void proc (
 	Matrix& c)
 {
     short n = a.length();
-    std::cout << "n: " << n << std::endl;
     short mid = n/2;
     
     std::vector<Matrix> p;

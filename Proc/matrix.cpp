@@ -154,18 +154,15 @@ Matrix Matrix::subset(short p, short q, short r, short s) const
     Matrix m = Matrix(q - p + 1);
     short n = m.length();
     
-    t %= n;
-    u %= n;
-    
     for (int i = p; i <= q; i++)
     {
         for (int j = r; j <= s; j++)
         {
+            u = (i - 1) % n;
+            t = (j - 1) % n;
             m.setElement(u, t, data[i-1][j-1]);
         }
     }
-    
-    m.printMatrix();
     
     return m;
 }
