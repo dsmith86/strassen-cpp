@@ -2,9 +2,10 @@
 #include <chrono>
 #include <cassert>
 #include <vector>
+#include <tgmath.h>
 #include "matrix.h"
 
-long long timer (short n);
+unsigned long long timer (short n);
 void proc (
 	const Matrix& a,
 	const Matrix& b,
@@ -12,42 +13,45 @@ void proc (
 
 int main()
 {
-	short n;
+    short maxN;
+    std::vector<long long> times;
 
-	std::cout << "n: ";
-	std::cin >> n;
-    long long microseconds = timer(n);
-	std::cout << "Elapsed time for " << n << ": " << microseconds << std::endl;
+    std::cout << "max n (power of 2): ";
+    std::cin >> maxN;
+    
+    for (int i = 1; i <= maxN; i*=2)
+    {
+        // Create and multiply matrices of size n x n.
+        unsigned long long microseconds = timer(i);
+        
+        // Output the time needed to do the above operation.
+        std::cout << microseconds << ",";
+    }
+    
+    std::cout << std::endl;
 
 	return EXIT_SUCCESS;
 }
 
-long long timer (short n)
+unsigned long long timer (short n)
 {
 	assert(n >= 1);
 
 	Matrix a = Matrix(n);
     a.fillRandom();
-    std::cout << "matrix a" << std::endl;
-    a.printMatrix();
 
 	Matrix b = Matrix(n);
     b.fillRandom();
-    std::cout << "matrix b" << std::endl;
-    b.printMatrix();
 
 	Matrix c = Matrix(n);
 
 	auto start = std::chrono::high_resolution_clock::now();
 
 	proc (a, b, c);
-    
-    std::cout << "matrix c" << std::endl;
-    c.printMatrix();
 
 	auto elapsed = std::chrono::high_resolution_clock::now() - start;
 
-	long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+	unsigned long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
 	return microseconds;
 }
